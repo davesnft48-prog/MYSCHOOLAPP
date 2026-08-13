@@ -1,0 +1,46 @@
+name: schoollog_app
+description: Offline-first Examination Management System
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  # Offline local database
+  sqflite: ^2.3.0
+  path: ^1.8.3
+
+  # State management
+  provider: ^6.1.1
+
+  # Secure local storage (for session/auth token)
+  shared_preferences: ^2.2.2
+
+  # Password hashing
+  crypto: ^3.0.3
+
+  # PDF export for results/report cards
+  pdf: ^3.10.7
+  printing: ^5.11.1
+
+  # Local notifications (results uploaded, scores updated)
+  flutter_local_notifications: ^16.3.0
+
+  # Charts for performance overview
+  fl_chart: ^0.66.0
+
+  # Date handling for terms/sessions
+  intl: ^0.18.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
