@@ -1,18 +1,21 @@
-workflows:
+1workflows:
   android-workflow:
     name: Android Workflow
     max_build_duration: 30
     environment:
       flutter: stable
     scripts:
-      - name: Generate missing platform folders
+      - name: Generate missing platform folders safely
         script: |
-          flutter create . --platforms=android --org com.schoollog.app
+          if [ ! -d "android" ]; then
+            flutter create --platforms=android --org com.schoollog.app /tmp/platform_gen
+            cp -r /tmp/platform_gen/android .
+          fi
       - name: Get Flutter packages
         script: |
           flutter pub get
       - name: Build Android APK
         script: |
           flutter build apk --release
-    artifacts:
+artifacts:
       - build/**/outputs/**/*.apk
