@@ -1,0 +1,50 @@
+workflows:
+  android-workflow:
+    name: Android Workflow
+    max_build_duration: 30
+    environment:
+      flutter: stable
+    scripts:
+      - name: Generate missing platform folders safely
+        script: |
+          if [ ! -d "android" ]; then
+            flutter create --platforms=android --org com.schoollog.app /tmp/platform_gen
+            cp -r /tmp/platform_gen/android .
+          fi
+      - name: Enable core library desugaring
+        script: |
+          if [ -f "android/app/build.gradle.kts" ]; then
+            cat >> android/app/build.gradle.kts << 'GRADLEEOF'
+
+          android {
+              compileOptions {
+                  isCoreLibraryDesugaringEnabled = true
+              }
+          }
+
+          dependencies {
+              coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+          }
+          GRADLEEOF
+          elif [ -f "android/app/build.gradle" ]; then
+            cat >> android/app/build.gradle << 'GRADLEEOF'
+
+          android {
+              compileOptions {
+                  coreLibraryDesugaringEnabled true
+              }
+          }
+
+          dependencies {
+              coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+          }
+          GRADLEEOF
+          fi
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Build Android APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/**/outputs/**/*.apk
