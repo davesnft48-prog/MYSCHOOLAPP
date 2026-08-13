@@ -29,7 +29,7 @@ dependencies:
   printing: ^5.11.1
 
   # Local notifications (results uploaded, scores updated)
-  flutter_local_notifications: ^16.3.0
+  flutter_local_notifications: ^17.2.3
 
   # Charts for performance overview
   fl_chart: ^0.66.0
