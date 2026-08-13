@@ -90,7 +90,7 @@ class DBHelper {
     await db.insert('users', {
       'name': 'School Admin',
       'email': 'admin@schoollog.app',
-      'passwordHash': '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a',
+      'passwordHash': '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
       'role': 'admin',
       'linkedStudentId': null,
     });
